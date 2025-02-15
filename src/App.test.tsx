@@ -5,7 +5,6 @@ import App from './App';
 describe('App', () => {
   test('renders the component', () => {
     render(<App />);
-    screen.debug();
     expect(screen.getByText('List of posts')).toBeInTheDocument();
   });
 

@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 
+import { useFetchPosts } from './hooks/useFetchPosts';
 import './App.css'
-import { fetchData, Post } from './app.data';
 
 const columns = [
   { field: 'userId', headerName: 'User ID', width: 150 },
@@ -22,15 +21,7 @@ const dataGridStyle = {
 };
 
 const App = () => {
-  const [data, setData] = useState<Post[]>([]);
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetchData();
-      setData(response.data);
-    };
-    getData();
-  }, [])
+  const { data } = useFetchPosts()
 
   return (
     <>

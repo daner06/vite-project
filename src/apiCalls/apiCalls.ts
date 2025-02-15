@@ -10,6 +10,5 @@ export type Post = {
 }
 
 export const fetchData = async () => {
-  const data = await axios.get<Post[]>(url);
-  return data;
+  return await axios.get<Post[]>(url);
 };
