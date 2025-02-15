@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios';
 import { DataGrid } from '@mui/x-data-grid';
 
 import './App.css'
+import { fetchData, Post } from './app.data';
 
-const url = 'https://jsonplaceholder.typicode.com/posts';
+const columns = [
+  { field: 'userId', headerName: 'User ID', width: 150 },
+  { field: 'id', headerName: 'ID', width: 150 },
+  { field: 'title', headerName: 'Title', width: 150 },
+  { field: 'body', headerName: 'Body', width: 150 },
+];
 
-type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-const fetchData = async () => {
-  const data = await axios.get<Post[]>(url);
-  return data;
+const dataGridStyle = {
+  '& .MuiDataGrid-cell': {
+    color: 'white',
+  },
+  '& .MuiDataGrid-columnHeaders': {
+    backgroundColor: '#f5f5f5',
+    color: 'black',
+  },
 };
 
 const App = () => {
@@ -36,21 +39,8 @@ const App = () => {
         {data && (
           <DataGrid
             rows={data}
-            columns={[
-              { field: 'userId', headerName: 'User ID', width: 150 },
-              { field: 'id', headerName: 'ID', width: 150 },
-              { field: 'title', headerName: 'Title', width: 150 },
-              { field: 'body', headerName: 'Body', width: 150 },
-            ]}
-            sx={{
-              '& .MuiDataGrid-cell': {
-                color: 'white',
-              },
-              '& .MuiDataGrid-columnHeaders': {
-                backgroundColor: '#f5f5f5',
-                color: 'black',
-              },
-            }}
+            columns={columns}
+            sx={dataGridStyle}
           />)}
       </div>
     </>
